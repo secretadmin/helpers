@@ -25,6 +25,7 @@ ext {
     publishedGroupId = 'com.secretbiology.helpers'
     libraryName = 'general'
     artifact = 'general'
+    artifactGroupId = 'general'
 
     libraryDescription = 'General functions for secret biology'
 
@@ -50,5 +51,5 @@ dependencies {
     compile files("C:/Program Files/Java/jdk1.8.0_73/lib/tools.jar")
 }
 
-apply from: 'https://gist.githubusercontent.com/rohitsuratekar/18c1a266a9463e9bcc964152cc783d2e/raw/c0ea97de7c46e262d3c3a0ea8a355910f39ea37f/libraryinstall.gradle'
+apply from: 'https://gist.githubusercontent.com/rohitsuratekar/18c1a266a9463e9bcc964152cc783d2e/raw/618001d31020c247127f3aa879af599cd97e69ba/libraryinstall.gradle'
 apply from: 'https://gist.githubusercontent.com/rohitsuratekar/693839715335a50f9eb9f92d7db8f68e/raw/2e74a9940739e01ec0c999e6dddf621728791565/bintrayinstall.gradle'

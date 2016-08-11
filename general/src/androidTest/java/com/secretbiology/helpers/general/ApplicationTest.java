@@ -1,4 +1,4 @@
-package com.secretbiology.helpers;
+package com.secretbiology.helpers.general;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

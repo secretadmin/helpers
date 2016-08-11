@@ -1,4 +1,4 @@
-package com.secretbiology.helpers;
+package com.secretbiology.helpers.general;
 
 import org.junit.Test;
 
