@@ -7,19 +7,19 @@ This project is currently in development phase. To get beta functions, use follo
 
 For Gradle
 
-     compile 'com.secretbiology.helpers:general:0.0.2'
+     compile 'com.secretbiology.helpers:general:0.0.4'
 
 For Maven
 
      <dependency> 
      <groupId>com.secretbiology.helpers</groupId> 
      <artifactId>general</artifactId> 
-     <version>0.0.2</version> 
+     <version>0.0.4</version> 
      <type>pom</type> 
      </dependency>
      
 For Ivy
 
-      <dependency org='com.secretbiology.helpers' name='general' rev='0.0.2'> 
+      <dependency org='com.secretbiology.helpers' name='general' rev='0.0.4'> 
       <artifact name='$AID' ext='pom'></artifact> 
       </dependency>
