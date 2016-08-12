@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -18,6 +19,7 @@ public class Table {
     private final String TAG = getClass().getSimpleName();
     private String name;
     private List<Column> columns;
+    private LinkedHashMap<String, Column> map;
     private SQLiteDatabase db;
     private String defaultTextValue = "null";
     private int defaultIntValue = 0;
@@ -41,6 +43,10 @@ public class Table {
             returnList.add(c);
         }
         this.columns = returnList;
+        this.map = new LinkedHashMap<>();
+        for (Column c : columns) {
+            this.map.put(c.getName(), c);
+        }
     }
 
 
@@ -52,6 +58,12 @@ public class Table {
         return columns;
     }
 
+    /**
+     * @return LinkedHashMap for columns with column name as key
+     */
+    public LinkedHashMap<String, Column> getMap() {
+        return map;
+    }
 
     /**
      * Get Column of Table
@@ -60,12 +72,12 @@ public class Table {
      * @return : Column matching name
      */
     public Column getColumn(String name) {
-        for (Column col : columns) {
-            if (col.getName().equals(name)) {
-                return col;
-            }
+        Column col = map.get(name);
+        if (col != null) {
+            return col;
+        } else {
+            throw new NoSuchElementException("Column " + name + " is not found in the table " + this.name);
         }
-        throw new NoSuchElementException("Column " + name + " is not found in the table " + this.name);
     }
 
     /**
@@ -121,7 +133,7 @@ public class Table {
     /**
      * @return All rows in the form of TableLocation
      */
-    public List<List<TableLocation>> getAllRows() {
+    public List<LinkedHashMap<String, Column>> getAllRows() {
         return new Row(db, name, columns).getAllRows();
     }
 
@@ -210,9 +222,9 @@ public class Table {
         Object uniqueValue = "";
         ContentValues values = new ContentValues();
         for (Column c : ColumnList) {
-            if (c.getName().equals(UniqueColumn)) {
-                uniqueValue = c.getData();
-            }
+
+            uniqueValue = map.get(UniqueColumn).getData();
+
             switch (c.getType()) {
                 case TEXT:
                     if (c.getData() != null) {

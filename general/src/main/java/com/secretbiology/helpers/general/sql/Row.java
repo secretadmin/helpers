@@ -4,25 +4,26 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
  * Represents Row of sqlight table
  * Mandatory inputs : SQLiteDatabase, Table Name, List of Columns in Table
- * <p/>
+ * <p>
  * To Access specific row, you need to provide one of additional information
  * (1) ColumnName-Value pair
  * (2) Entire Column with values.
- * <p/>
- * You can access row information in the form of TableLocations from getItems() method. These are nothing but list of Column-Value pairs for each position
- * into specific row inside table. This will contains all basic properties of Column (Name, Type, Index) as well as it's value
+ * <p>
+ * You can access row information in the form LinkedHashMap<String, Column>
  */
 
 public class Row {
 
     private final String TAG = getClass().getSimpleName();
     private List<Column> columnNames;
-    private List<TableLocation> rowItems;
+    // private List<TableLocation> rowItems;
+    private LinkedHashMap<String, Column> map;
     private SQLiteDatabase db;
     private String tableName;
 
@@ -40,7 +41,6 @@ public class Row {
         this.db = db;
         this.columnNames = Column;
         this.tableName = tableName;
-        rowItems = new ArrayList<>();
 
         Cursor cursor = db.query(tableName, makeColumnString(), ColumnName + "=?",
                 new String[]{String.valueOf(value)}, null, null, null, null);
@@ -48,7 +48,7 @@ public class Row {
         if (cursor != null) {
             cursor.moveToFirst();
             for (int i = 0; i < Column.size(); i++) {
-                rowItems.add(getLocations(Column.get(i), cursor, i));
+                map.put(Column.get(i).getName(), withValues(Column.get(i), cursor, i));
             }
             cursor.close();
         }
@@ -67,57 +67,46 @@ public class Row {
         this.db = db;
         this.columnNames = Column;
         this.tableName = tableName;
-
-        if (Column.get(0).getData() != null) {
-            rowItems = new ArrayList<>();
-            for (Column c : Column) {
-                rowItems.add(new TableLocation(tableName, c));
-            }
+        for (Column c : Column) {
+            map.put(c.getName(), c);
         }
     }
 
-    private TableLocation getLocations(Column Column, Cursor cursor, int position) {
+    private Column withValues(Column Column, Cursor cursor, int position) {
 
         switch (Column.getType()) {
             case TEXT:
-                return new TableLocation(tableName, new Column(Column.getName(), Column.getType(), cursor.getString(position)));
+                return new Column(Column.getName(), Column.getType(), cursor.getString(position));
 
             case INTEGER:
-                return new TableLocation(tableName, new Column(Column.getName(), Column.getType(), cursor.getInt(position)));
+                return new Column(Column.getName(), Column.getType(), cursor.getInt(position));
 
             case PRIMARY_INTEGER:
-                return new TableLocation(tableName, new Column(Column.getName(), Column.getType(), cursor.getInt(position)));
+                return new Column(Column.getName(), Column.getType(), cursor.getInt(position));
 
 
         }
         throw new NullPointerException("Table is empty");
     }
 
-    /**
-     * @return List of TableLocations from given rows.
-     */
-    public List<TableLocation> getItems() {
-        if (rowItems.size() != 0) {
-            return rowItems;
-        } else
-            throw new NullPointerException("Error in " + TAG + " :No values are set in the list of columns provided in constructor");
-
+    public LinkedHashMap<String, Column> getMap() {
+        return map;
     }
 
     /**
      * @return List of all rows with respective TableLocation Lists
      */
-    public List<List<TableLocation>> getAllRows() {
-        List<List<TableLocation>> returnList = new ArrayList<>();
+    public List<LinkedHashMap<String, Column>> getAllRows() {
+        List<LinkedHashMap<String, Column>> returnList = new ArrayList<>();
         String selectQuery = "SELECT  * FROM " + tableName;
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {
-                List<TableLocation> loc = new ArrayList<>();
+                LinkedHashMap<String, Column> m = new LinkedHashMap<>();
                 for (int i = 0; i < columnNames.size(); i++) {
-                    loc.add(getLocations(columnNames.get(i), cursor, i));
+                    m.put(columnNames.get(i).getName(), withValues(columnNames.get(i), cursor, i));
                 }
-                returnList.add(loc);
+                returnList.add(m);
             } while (cursor.moveToNext());
         }
         cursor.close();
