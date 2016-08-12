@@ -110,7 +110,7 @@ public class General {
      * @param date : Date
      * @return : Readable time in String
      */
-    public String makeReadableTime(Date date) {
+    public static String makeReadableTime(Date date) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
         DateTime timestamp = new DateTime(date);
         DateTime currentTime = new DateTime(new Date());
