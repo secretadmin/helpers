@@ -1,7 +1,6 @@
 apply plugin: 'com.github.dcendents.android-maven'
 
-group = publishedGroupId                           // Maven Group ID for the artifact
-
+group = publishedGroupId                        
 install {
     repositories.mavenInstaller {
         // This generates POM.xml with proper parameters
@@ -10,7 +9,6 @@ install {
                 packaging 'aar'
                 groupId publishedGroupId
                 artifactId artifact
-                archivesBaseName = artifactGroupId
 
                 // Add your description here
                 name libraryName
