@@ -10,11 +10,11 @@ import java.util.List;
 /**
  * Represents Row of sqlight table
  * Mandatory inputs : SQLiteDatabase, Table Name, List of Columns in Table
- * <p>
+ * <p/>
  * To Access specific row, you need to provide one of additional information
  * (1) ColumnName-Value pair
  * (2) Entire Column with values.
- * <p>
+ * <p/>
  * You can access row information in the form LinkedHashMap<String, Column>
  */
 
@@ -41,6 +41,7 @@ public class Row {
         this.db = db;
         this.columnNames = Column;
         this.tableName = tableName;
+        this.map = new LinkedHashMap<>();
 
         Cursor cursor = db.query(tableName, makeColumnString(), ColumnName + "=?",
                 new String[]{String.valueOf(value)}, null, null, null, null);
@@ -67,6 +68,7 @@ public class Row {
         this.db = db;
         this.columnNames = Column;
         this.tableName = tableName;
+        this.map = new LinkedHashMap<>();
         for (Column c : Column) {
             map.put(c.getName(), c);
         }
@@ -94,7 +96,7 @@ public class Row {
     }
 
     /**
-     * @return List of all rows with respective TableLocation Lists
+     * @return List of all rows with respective map
      */
     public List<LinkedHashMap<String, Column>> getAllRows() {
         List<LinkedHashMap<String, Column>> returnList = new ArrayList<>();

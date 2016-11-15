@@ -85,7 +85,7 @@ public class Table {
      */
     public void make() {
         if (columns != null) {
-            Log.d(TAG, "Table creating process started");
+            Log.i(TAG, "Table creating process started");
             String tableString = "CREATE TABLE " + name + "( ";
             switch (columns.size()) {
                 case 0:
@@ -152,9 +152,6 @@ public class Table {
                         Log.e(TAG, c.getName() + " : No value found for this column. Default text value will be used.");
                         values.put(c.getName(), defaultTextValue);
                     }
-                    break;
-                case PRIMARY_INTEGER:
-                    values.put(c.getName(), 0);
                     break;
                 case INTEGER:
                     if (c.getData() != null) {
@@ -233,9 +230,6 @@ public class Table {
                         Log.e(TAG, c.getName() + " : No value found for this column. Default text value will be used.");
                         values.put(c.getName(), defaultTextValue);
                     }
-                    break;
-                case PRIMARY_INTEGER:
-                    values.put(c.getName(), 0);
                     break;
                 case INTEGER:
                     if (c.getData() != null) {
