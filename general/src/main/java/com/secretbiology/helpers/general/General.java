@@ -11,6 +11,7 @@ import org.joda.time.Interval;
 import java.net.Proxy;
 import java.net.ProxySelector;
 import java.net.URI;
+import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -66,7 +67,7 @@ public class General {
      * @param max : maximum value
      * @return : random integer between min and max
      */
-    public int randInt(int min, int max) {
+    public static int randInt(int min, int max) {
         return min + (int) (Math.random() * ((max - min) + 1));
     }
 
@@ -135,5 +136,21 @@ public class General {
         } else return formatter.format(date);
     }
 
+    private static final String CharSpace = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    private static SecureRandom randomFunc = new SecureRandom();
+
+    /**
+     * Returns random alpha-numerical string
+     *
+     * @param len : Length of string
+     * @return random alpha-numerical string of given length
+     */
+
+    public static String randomString(int len) {
+        StringBuilder builder = new StringBuilder(len);
+        for (int i = 0; i < len; i++)
+            builder.append(CharSpace.charAt(randomFunc.nextInt(CharSpace.length())));
+        return builder.toString();
+    }
 
 }

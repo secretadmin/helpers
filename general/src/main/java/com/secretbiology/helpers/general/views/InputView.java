@@ -100,6 +100,10 @@ public class InputView extends LinearLayout {
         layout.setHint(hint);
     }
 
+    public String getHint() {
+        return hint;
+    }
+
     public void setError(String error) {
         layout.setError(error);
     }

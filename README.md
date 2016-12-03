@@ -10,7 +10,7 @@ Following are the specifications related to compilations
 
      compileSdkVersion 24
      buildToolsVersion "23.0.3"
-     minSdkVersion 19
+     minSdkVersion 15
      targetSdkVersion 24
 
 ### External libraries used
@@ -20,18 +20,19 @@ Following are the specifications related to compilations
 ### Currently supported functions
 
 (1) SQLight Database Functions </br>
-(2) General Functions
+(2) General Functions </br>
+(3) General Views
 
 
 ### Use for Gradle
 
-     compile 'com.secretbiology.helpers:general:0.1.3'
+     compile 'com.secretbiology.helpers:general:0.1.5'
 
 ### For Maven
 
      <dependency> 
      <groupId>com.secretbiology.helpers</groupId> 
      <artifactId>general</artifactId> 
-     <version>0.1.3</version> 
+     <version>0.1.5</version> 
      <type>pom</type> 
      </dependency>
