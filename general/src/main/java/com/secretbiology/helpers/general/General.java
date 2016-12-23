@@ -1,9 +1,12 @@
 package com.secretbiology.helpers.general;
 
 import android.content.Context;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
+import android.widget.ImageView;
 
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
@@ -148,9 +151,23 @@ public class General {
 
     public static String randomString(int len) {
         StringBuilder builder = new StringBuilder(len);
-        for (int i = 0; i < len; i++)
+        for (int i = 0; i < len; i++) {
             builder.append(CharSpace.charAt(randomFunc.nextInt(CharSpace.length())));
+        }
         return builder.toString();
+    }
+
+    /**
+     * Makes Imageview grayscale
+     *
+     * @param view : Imageview which will be converted into Grayscale (black and white)
+     */
+
+    public static void makeGrayScale(ImageView view) {
+        ColorMatrix matrix = new ColorMatrix();
+        matrix.setSaturation(0);
+        ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+        view.setColorFilter(filter);
     }
 
 }
