@@ -6,7 +6,9 @@ import android.graphics.ColorMatrixColorFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
+import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
@@ -78,7 +80,7 @@ public class General {
      * @return : Current timestamp
      */
     public static String timeStamp() {
-        SimpleDateFormat formatter = new SimpleDateFormat("hh:mm:ss a d MMM yy", Locale.getDefault());
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault());
         return formatter.format(new Date());
     }
 
@@ -168,6 +170,77 @@ public class General {
         matrix.setSaturation(0);
         ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
         view.setColorFilter(filter);
+    }
+
+    /**
+     * Returns similarity between two strings.
+     * It is output of amount of insertion, deletion or substitution required to get second string from first
+     * 100 will be same strings
+     *
+     * @param s1  : first string
+     * @param s2: second string
+     * @return percentage similarity
+     */
+
+    public static int percentSimilarity(String s1, String s2) {
+        String longer = s1, shorter = s2;
+        if (s1.length() < s2.length()) { // longer should always have greater length
+            longer = s2;
+            shorter = s1;
+        }
+        int longerLength = longer.length();
+        if (longerLength == 0) {
+            return 100; /* both strings are zero length */
+        }
+        return (int) (((longerLength - editDistance(longer, shorter)) / (double) longerLength) * 100);
+    }
+
+    private static int editDistance(String s1, String s2) {
+        s1 = s1.toLowerCase();
+        s2 = s2.toLowerCase();
+
+        int[] costs = new int[s2.length() + 1];
+        for (int i = 0; i <= s1.length(); i++) {
+            int lastValue = i;
+            for (int j = 0; j <= s2.length(); j++) {
+                if (i == 0)
+                    costs[j] = j;
+                else {
+                    if (j > 0) {
+                        int newValue = costs[j - 1];
+                        if (s1.charAt(i - 1) != s2.charAt(j - 1))
+                            newValue = Math.min(Math.min(newValue, lastValue),
+                                    costs[j]) + 1;
+                        costs[j - 1] = lastValue;
+                        lastValue = newValue;
+                    }
+                }
+            }
+            if (i > 0)
+                costs[s2.length()] = lastValue;
+        }
+        return costs[s2.length()];
+    }
+
+    /**
+     * Simple short Toast
+     *
+     * @param context : Context
+     * @param message : Message to Display
+     */
+    public static void shortToast(Context context, String message) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Simple long Toast
+     *
+     * @param context : Context
+     * @param message : Message to Display
+     */
+
+    public static void longToast(Context context, String message) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
 
 }

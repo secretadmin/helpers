@@ -24,12 +24,13 @@ Following are the specifications related to compilations
 (1) SQLight Database Functions </br>
 (2) General Functions </br>
 (3) General UI views and ViewPageAdapters </br>
-(4) Date Converter
+(4) Date Converter </br>
+(5) Test Logger 
 
 
 ### Use for Gradle
 
-     compile 'com.secretbiology.helpers:general:0.1.6'
+     compile 'com.secretbiology.helpers:general:0.1.8'
 
 
 ### For Maven
@@ -37,6 +38,6 @@ Following are the specifications related to compilations
      <dependency> 
      <groupId>com.secretbiology.helpers</groupId> 
      <artifactId>general</artifactId> 
-     <version>0.1.6</version> 
+     <version>0.1.8</version> 
      <type>pom</type> 
      </dependency>

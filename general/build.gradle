@@ -39,7 +39,7 @@ ext {
     siteUrl = 'https://github.com/secretBiology'
     gitUrl = 'https://github.com/secretBiology/helpers.git'
 
-    libraryVersion = '0.1.6'
+    libraryVersion = '0.1.8'
 
     developerId = 'rohitsuratekar'
     developerName = 'Rohit Suratekar'
