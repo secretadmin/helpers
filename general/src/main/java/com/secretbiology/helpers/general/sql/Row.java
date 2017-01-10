@@ -1,5 +1,6 @@
 package com.secretbiology.helpers.general.sql;
 
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -17,7 +18,7 @@ import java.util.List;
  * <p/>
  * You can access row information in the form LinkedHashMap<String, Column>
  */
-
+@Deprecated
 public class Row {
 
     private final String TAG = getClass().getSimpleName();

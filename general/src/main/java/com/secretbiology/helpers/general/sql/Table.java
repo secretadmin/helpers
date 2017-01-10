@@ -14,6 +14,8 @@ import java.util.NoSuchElementException;
  * Represents sqlight Table
  * Mandatory fields: SQLight Database, Name of Table
  */
+
+@Deprecated
 public class Table {
 
     private final String TAG = getClass().getSimpleName();

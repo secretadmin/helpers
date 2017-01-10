@@ -5,6 +5,7 @@ package com.secretbiology.helpers.general.sql;
  * Each column MUST have two properties : Name and Type of Data it holds
  * Value of Column is optional and can be set later on if needed
  */
+@Deprecated
 public class Column {
 
     public enum ColumnType {PRIMARY_INTEGER, TEXT, INTEGER}
