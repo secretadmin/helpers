@@ -13,14 +13,14 @@ import java.util.List;
 public class Table {
 
     private SQLiteDatabase db;
-    private Operator operator;
+    private DatabaseManager databaseManager;
     private String tableName;
     private List<Column> columns;
 
-    public Table(Operator operator, String tableName, List<Column> columns) {
+    public Table(DatabaseManager databaseManager, String tableName, List<Column> columns) {
         this.tableName = tableName;
-        this.operator = operator;
-        this.db = operator.getWritableDatabase();
+        this.databaseManager = databaseManager;
+        this.db = databaseManager.getWritableDatabase();
         this.columns = columns;
     }
 
@@ -48,7 +48,7 @@ public class Table {
             }
         }
         long id = db.insert(tableName, null, values);
-        operator.closeDatabase();
+        databaseManager.closeDatabase();
         return id;
     }
 
@@ -84,7 +84,7 @@ public class Table {
             } while (c.moveToNext());
         }
         c.close();
-        operator.closeDatabase();
+        databaseManager.closeDatabase();
         return list;
     }
 
@@ -104,18 +104,18 @@ public class Table {
 
         long updated = db.update(tableName, values, " id = ?",
                 new String[]{String.valueOf(row.getKey())});
-        operator.closeDatabase();
+        databaseManager.closeDatabase();
         return updated;
     }
 
     public void delete(int id) {
         db.delete(tableName, "id = ?", new String[]{String.valueOf(id)});
-        operator.closeDatabase();
+        databaseManager.closeDatabase();
     }
 
     public void clearAll() {
         db.execSQL("DELETE FROM " + tableName);
-        operator.closeDatabase();
+        databaseManager.closeDatabase();
     }
 
     public Row get(int id, String indexColumnName) {
@@ -149,7 +149,7 @@ public class Table {
             row = new Row(cursor.getInt(0), tempList);
             cursor.close();
         }
-        operator.closeDatabase();
+        databaseManager.closeDatabase();
         return row;
     }
 
@@ -172,7 +172,7 @@ public class Table {
             String Query = "DELETE FROM " + tableName + " WHERE id IN (SELECT id FROM " + tableName + " ORDER BY id ASC LIMIT " + allowedEntries + ")";
             db.execSQL(Query);
         }
-        operator.closeDatabase();
+        databaseManager.closeDatabase();
     }
 
 

@@ -12,15 +12,15 @@ public class ObjectTable {
 
 
     private SQLiteDatabase db;
-    private Operator operator;
+    private DatabaseManager databaseManager;
     private Gson gson = new Gson();
     private static final String ColumnName = "SerializedStrings";
     private String tableName;
 
-    public ObjectTable(Operator operator, String tableName) {
+    public ObjectTable(DatabaseManager databaseManager, String tableName) {
         this.tableName = tableName;
-        this.operator = operator;
-        this.db = operator.getWritableDatabase();
+        this.databaseManager = databaseManager;
+        this.db = databaseManager.getWritableDatabase();
     }
 
     public static void make(String tableName, SQLiteDatabase db) {
@@ -33,7 +33,7 @@ public class ObjectTable {
         ContentValues values = new ContentValues();
         values.put(ColumnName, gson.toJson(object));
         long id = db.insert(tableName, null, values);
-        operator.closeDatabase();
+        databaseManager.closeDatabase();
         return id;
     }
 
@@ -47,7 +47,7 @@ public class ObjectTable {
             } while (c.moveToNext());
         }
         c.close();
-        operator.closeDatabase();
+        databaseManager.closeDatabase();
         return list;
     }
 
@@ -56,18 +56,18 @@ public class ObjectTable {
         values.put(ColumnName, gson.toJson(object));
         long updated = db.update(tableName, values, " id = ?",
                 new String[]{String.valueOf(id)});
-        operator.closeDatabase();
+        databaseManager.closeDatabase();
         return updated;
     }
 
     public void delete(int id) {
         db.delete(tableName, "id = ?", new String[]{String.valueOf(id)});
-        operator.closeDatabase();
+        databaseManager.closeDatabase();
     }
 
     public void clearAll() {
         db.execSQL("DELETE FROM " + tableName);
-        operator.closeDatabase();
+        databaseManager.closeDatabase();
     }
 
     public Object get(int id, Class cls) {
@@ -79,7 +79,7 @@ public class ObjectTable {
             object = gson.fromJson(cursor.getString(1), cls);
             cursor.close();
         }
-        operator.closeDatabase();
+        databaseManager.closeDatabase();
         return object;
     }
 
@@ -107,6 +107,6 @@ public class ObjectTable {
             String Query = "DELETE FROM " + tableName + " WHERE id IN (SELECT id FROM " + tableName + " ORDER BY id ASC LIMIT " + allowedEntries + ")";
             db.execSQL(Query);
         }
-        operator.closeDatabase();
+        databaseManager.closeDatabase();
     }
 }

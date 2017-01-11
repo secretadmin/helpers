@@ -6,13 +6,13 @@ import android.util.Log;
 
 import com.secretbiology.helpers.general.database.Column;
 import com.secretbiology.helpers.general.database.ObjectTable;
-import com.secretbiology.helpers.general.database.Operator;
+import com.secretbiology.helpers.general.database.DatabaseManager;
 import com.secretbiology.helpers.general.database.Table;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataManager extends Operator {
+public class DataManager extends DatabaseManager {
 
     static String n = "kk";
     static int y = 6;

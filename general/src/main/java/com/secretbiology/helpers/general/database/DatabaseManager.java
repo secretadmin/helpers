@@ -5,16 +5,16 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class Operator extends SQLiteOpenHelper {
+public class DatabaseManager extends SQLiteOpenHelper {
 
-    Context context;
+    private Context context;
 
-    public Operator(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+    public DatabaseManager(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
         this.context = context;
     }
 
-    public Operator(Context context, String name, int version) {
+    public DatabaseManager(Context context, String name, int version) {
         super(context, name, null, version);
         this.context = context;
     }
@@ -30,16 +30,16 @@ public class Operator extends SQLiteOpenHelper {
     }
 
 
-    private static Operator instance;
+    private static DatabaseManager instance;
 
     private int mOpenCounter;
 
     public SQLiteDatabase mDatabase;
 
 
-    public static synchronized Operator getInstance(Context context, String name, int version) {
+    public static synchronized DatabaseManager getInstance(Context context, String name, int version) {
         if (instance == null) {
-            instance = new Operator(context.getApplicationContext(), name, version);
+            instance = new DatabaseManager(context.getApplicationContext(), name, version);
         }
         return instance;
     }
