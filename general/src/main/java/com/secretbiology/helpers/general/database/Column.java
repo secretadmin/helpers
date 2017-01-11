@@ -2,7 +2,7 @@ package com.secretbiology.helpers.general.database;
 
 public class Column {
 
-    public enum TYPE {PRIMARY_INTEGER, INTEGER, TEXT, BLOB, REAL}
+    public enum TYPE {INTEGER_PRIMARY_KEY, INTEGER, TEXT, BLOB, REAL}
 
     private String name;
     private TYPE type;
@@ -17,11 +17,6 @@ public class Column {
     public Column(String name, TYPE type) {
         this.name = name;
         this.type = type;
-    }
-
-    public Column(String name, Object value) {
-        this.name = name;
-        this.value = value;
     }
 
     public String getName() {

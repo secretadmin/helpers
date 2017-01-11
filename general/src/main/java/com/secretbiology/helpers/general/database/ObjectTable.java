@@ -90,12 +90,12 @@ public class ObjectTable {
 
     public void drop() {
         db.execSQL("DROP TABLE IF EXISTS " + tableName);
-        Log.i("ObjectTable", "Table" + tableName + " dropped.");
+        Log.i("ObjectTable", "Table " + tableName + " dropped.");
     }
 
     public static void drop(String tableName, SQLiteDatabase db) {
         db.execSQL("DROP TABLE IF EXISTS " + tableName);
-        Log.i("ObjectTable", "Table" + tableName + " dropped.");
+        Log.i("ObjectTable", "Table " + tableName + " dropped.");
     }
 
     public void removeOldEntries(long allowedEntries) {

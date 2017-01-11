@@ -5,8 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.secretbiology.helpers.general.database.Column;
-import com.secretbiology.helpers.general.database.ObjectTable;
 import com.secretbiology.helpers.general.database.DatabaseManager;
+import com.secretbiology.helpers.general.database.ObjectTable;
 import com.secretbiology.helpers.general.database.Table;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import java.util.List;
 public class DataManager extends DatabaseManager {
 
     static String n = "kk";
-    static int y = 6;
+    static int y = 9;
 
     public DataManager(Context context, String name, int version) {
         super(context, name, version);
@@ -37,6 +37,9 @@ public class DataManager extends DatabaseManager {
 
         Log.i("Database", "Database upgraded to " + newVersion);
         Table.drop("ee4", db);
+        Table.drop("ee5", db);
+
+
         Table.make("ee5", db, getCol());
 
 
@@ -44,7 +47,7 @@ public class DataManager extends DatabaseManager {
 
     public static List<Column> getCol() {
         List<Column> columns = new ArrayList<>();
-        columns.add(new Column("id", Column.TYPE.PRIMARY_INTEGER));
+        columns.add(new Column("id", Column.TYPE.INTEGER_PRIMARY_KEY));
         columns.add(new Column("name", Column.TYPE.TEXT));
         columns.add(new Column("vr", Column.TYPE.TEXT));
 

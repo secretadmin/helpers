@@ -27,7 +27,7 @@ public class Table {
     public static void make(String tableName, SQLiteDatabase db, List<Column> columns) {
         String tableString = "CREATE TABLE " + tableName + " ( ";
         for (int i = 0; i < columns.size() - 1; i++) {
-            tableString = tableString + columns.get(i).getName() + " " + String.valueOf(columns.get(i).getType()) + ",";
+            tableString = tableString + columns.get(i).getName() + " " + String.valueOf(columns.get(i).getType()).replace("_", " ") + ",";
         }
         tableString = tableString + columns.get(columns.size() - 1).getName() + " "
                 + String.valueOf(columns.get(columns.size() - 1).getType()).replace("_", " ") + ")";
@@ -37,6 +37,25 @@ public class Table {
     public long add(Row row) {
         ContentValues values = new ContentValues();
         for (Column c : row.getColumns()) {
+            if (c.getValue() instanceof String) {
+                values.put(c.getName(), (String) c.getValue());
+            } else if (c.getValue() instanceof Integer) {
+                values.put(c.getName(), (int) c.getValue());
+            } else if (c.getValue() instanceof Double) {
+                values.put(c.getName(), (double) c.getValue());
+            } else {
+                values.put(c.getName(), new Gson().toJson(c.getValue()));
+            }
+        }
+
+        long id = db.insert(tableName, null, values);
+        databaseManager.closeDatabase();
+        return id;
+    }
+
+    public long add(List<Column> columnList) {
+        ContentValues values = new ContentValues();
+        for (Column c : columnList) {
             if (c.getValue() instanceof String) {
                 values.put(c.getName(), (String) c.getValue());
             } else if (c.getValue() instanceof Integer) {
@@ -60,26 +79,27 @@ public class Table {
         if (c.moveToFirst()) {
             do {
                 List<Column> tempList = new ArrayList<>();
-                for (int i = 0; i < columns.size() - 1; i++) {
+                for (int i = 0; i < columns.size(); i++) {
                     Column column = new Column(columns.get(i).getName(), columns.get(i).getType());
                     switch (columns.get(i).getType()) {
                         case INTEGER:
-                            column.setValue(c.getInt(i + 1));
+                            column.setValue(c.getInt(i));
                             break;
-                        case PRIMARY_INTEGER:
-                            column.setValue(c.getInt(i + 1));
+                        case INTEGER_PRIMARY_KEY:
+                            column.setValue(c.getInt(i));
                             break;
                         case TEXT:
-                            column.setValue(c.getString(i + 1));
+                            column.setValue(c.getString(i));
                             break;
                         case REAL:
-                            column.setValue(c.getDouble(i + 1));
+                            column.setValue(c.getDouble(i));
                             break;
                         default:
-                            column.setValue(c.getBlob(i + 1));
+                            column.setValue(c.getBlob(i));
                     }
                     tempList.add(column);
                 }
+
                 list.add(new Row(c.getInt(0), tempList));
             } while (c.moveToNext());
         }
@@ -132,7 +152,7 @@ public class Table {
                     case INTEGER:
                         column.setValue(cursor.getInt(i + 1));
                         break;
-                    case PRIMARY_INTEGER:
+                    case INTEGER_PRIMARY_KEY:
                         column.setValue(cursor.getInt(i + 1));
                         break;
                     case TEXT:
@@ -160,7 +180,7 @@ public class Table {
 
     public void drop() {
         db.execSQL("DROP TABLE IF EXISTS " + tableName);
-        Log.i("ObjectTable", "Table" + tableName + " dropped.");
+        Log.i("ObjectTable", "Table " + tableName + " dropped.");
     }
 
     public void removeOldEntries(long allowedEntries) {
@@ -178,7 +198,7 @@ public class Table {
 
     public static void drop(String tableName, SQLiteDatabase db) {
         db.execSQL("DROP TABLE IF EXISTS " + tableName);
-        Log.i("ObjectTable", "Table" + tableName + " dropped.");
+        Log.i("ObjectTable", "Table " + tableName + " dropped.");
     }
 
     private String[] getAllNames() {
