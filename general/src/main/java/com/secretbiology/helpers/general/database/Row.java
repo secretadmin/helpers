@@ -1,5 +1,6 @@
 package com.secretbiology.helpers.general.database;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class Row {
@@ -18,6 +19,14 @@ public class Row {
 
     public int getKey() {
         return key;
+    }
+
+    public HashMap<String, Object> getMap() {
+        HashMap<String, Object> map = new HashMap<>();
+        for (Column c : columns) {
+            map.put(c.getName(), c.getValue());
+        }
+        return map;
     }
 
     public void setKey(int key) {

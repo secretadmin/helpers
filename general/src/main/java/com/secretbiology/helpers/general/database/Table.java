@@ -37,14 +37,16 @@ public class Table {
     public long add(Row row) {
         ContentValues values = new ContentValues();
         for (Column c : row.getColumns()) {
-            if (c.getValue() instanceof String) {
-                values.put(c.getName(), (String) c.getValue());
-            } else if (c.getValue() instanceof Integer) {
-                values.put(c.getName(), (int) c.getValue());
-            } else if (c.getValue() instanceof Double) {
-                values.put(c.getName(), (double) c.getValue());
-            } else {
-                values.put(c.getName(), new Gson().toJson(c.getValue()));
+            if (!c.getType().equals(Column.TYPE.INTEGER_PRIMARY_KEY)) {
+                if (c.getValue() instanceof String) {
+                    values.put(c.getName(), (String) c.getValue());
+                } else if (c.getValue() instanceof Integer) {
+                    values.put(c.getName(), (int) c.getValue());
+                } else if (c.getValue() instanceof Double) {
+                    values.put(c.getName(), (double) c.getValue());
+                } else {
+                    values.put(c.getName(), new Gson().toJson(c.getValue()));
+                }
             }
         }
 
@@ -56,14 +58,16 @@ public class Table {
     public long add(List<Column> columnList) {
         ContentValues values = new ContentValues();
         for (Column c : columnList) {
-            if (c.getValue() instanceof String) {
-                values.put(c.getName(), (String) c.getValue());
-            } else if (c.getValue() instanceof Integer) {
-                values.put(c.getName(), (int) c.getValue());
-            } else if (c.getValue() instanceof Double) {
-                values.put(c.getName(), (double) c.getValue());
-            } else {
-                values.put(c.getName(), new Gson().toJson(c.getValue()));
+            if (!c.getType().equals(Column.TYPE.INTEGER_PRIMARY_KEY)) {
+                if (c.getValue() instanceof String) {
+                    values.put(c.getName(), (String) c.getValue());
+                } else if (c.getValue() instanceof Integer) {
+                    values.put(c.getName(), (int) c.getValue());
+                } else if (c.getValue() instanceof Double) {
+                    values.put(c.getName(), (double) c.getValue());
+                } else {
+                    values.put(c.getName(), new Gson().toJson(c.getValue()));
+                }
             }
         }
         long id = db.insert(tableName, null, values);
@@ -108,22 +112,24 @@ public class Table {
         return list;
     }
 
-    public long update(Row row) {
+    public long update(Row row, String uniqueColumn, String value) {
         ContentValues values = new ContentValues();
         for (Column c : row.getColumns()) {
-            if (c.getValue() instanceof String) {
-                values.put(c.getName(), (String) c.getValue());
-            } else if (c.getValue() instanceof Integer) {
-                values.put(c.getName(), (int) c.getValue());
-            } else if (c.getValue() instanceof Double) {
-                values.put(c.getName(), (double) c.getValue());
-            } else {
-                values.put(c.getName(), new Gson().toJson(c.getValue()));
+            if (!c.getType().equals(Column.TYPE.INTEGER_PRIMARY_KEY)) {
+                if (c.getValue() instanceof String) {
+                    values.put(c.getName(), (String) c.getValue());
+                } else if (c.getValue() instanceof Integer) {
+                    values.put(c.getName(), (int) c.getValue());
+                } else if (c.getValue() instanceof Double) {
+                    values.put(c.getName(), (double) c.getValue());
+                } else {
+                    values.put(c.getName(), new Gson().toJson(c.getValue()));
+                }
             }
         }
 
-        long updated = db.update(tableName, values, " id = ?",
-                new String[]{String.valueOf(row.getKey())});
+        long updated = db.update(tableName, values, uniqueColumn + "= ?",
+                new String[]{value});
         databaseManager.closeDatabase();
         return updated;
     }
@@ -174,13 +180,12 @@ public class Table {
     }
 
     public Cursor executeCustom(String query) {
-        Log.i("ObjectTable", "Close the cursor after using executeCustom.");
         return db.rawQuery(query, null);
     }
 
     public void drop() {
         db.execSQL("DROP TABLE IF EXISTS " + tableName);
-        Log.i("ObjectTable", "Table " + tableName + " dropped.");
+        Log.i("Table", "Table " + tableName + " dropped.");
     }
 
     public void removeOldEntries(long allowedEntries) {
@@ -198,7 +203,7 @@ public class Table {
 
     public static void drop(String tableName, SQLiteDatabase db) {
         db.execSQL("DROP TABLE IF EXISTS " + tableName);
-        Log.i("ObjectTable", "Table " + tableName + " dropped.");
+        Log.i("Table", "Table " + tableName + " dropped.");
     }
 
     private String[] getAllNames() {
