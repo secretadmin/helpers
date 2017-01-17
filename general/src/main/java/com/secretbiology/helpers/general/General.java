@@ -12,11 +12,13 @@ import android.widget.Toast;
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
 
+import java.lang.reflect.Type;
 import java.net.Proxy;
 import java.net.ProxySelector;
 import java.net.URI;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -240,6 +242,39 @@ public class General {
 
     public static void longToast(Context context, String message) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+    }
+
+    /**
+     * Combines two lists
+     *
+     * @param list1 : first list
+     * @param list2 : second list
+     * @return : combined list
+     */
+    public static List<Type> combineLists(List<Type> list1, List<Type> list2) {
+        List<Type> newList = new ArrayList<>(list1.size() + list2.size());
+        newList.addAll(list1);
+        newList.addAll(list2);
+        return newList;
+    }
+
+    /**
+     * Combines arbitrary number of lists
+     *
+     * @param lists : all lists
+     * @return : combined list
+     */
+
+    public static List<Type> combineLists(List<Type>... lists) {
+        int size = 0;
+        for (List<Type> list : lists) {
+            size = size + list.size();
+        }
+        List<Type> newList = new ArrayList<>(size);
+        for (List<Type> list : lists) {
+            newList.addAll(list);
+        }
+        return newList;
     }
 
 }

@@ -7,6 +7,7 @@ package com.secretbiology.helpers.general;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
@@ -237,11 +238,12 @@ public class DateConverter {
     }
 
     /**
-     * @param calList: Calender List
+     * @param cal: Calender List
      * @return : Sorted List
      */
 
-    public static List<Calendar> sortCalendars(List<Calendar> calList) {
+    public static List<Calendar> sortCalendars(List<Calendar> cal) {
+        List<Calendar> calList = new ArrayList<>(cal);
         Collections.sort(calList, new Comparator<Calendar>() {
             @Override
             public int compare(Calendar c1, Calendar c2) {
@@ -252,11 +254,12 @@ public class DateConverter {
     }
 
     /**
-     * @param dateList : List of Dates
+     * @param list : List of Dates
      * @return sorted List
      */
 
-    public static List<Date> sortDates(List<Date> dateList) {
+    public static List<Date> sortDates(List<Date> list) {
+        List<Date> dateList = new ArrayList<>(list);
         Collections.sort(dateList, new Comparator<Date>() {
             @Override
             public int compare(Date c1, Date c2) {
@@ -267,12 +270,13 @@ public class DateConverter {
     }
 
     /**
-     * @param mode       : Mode of DateFormat
-     * @param stringList : List of String
+     * @param mode  : Mode of DateFormat
+     * @param input : List of String
      * @return : Sorted List
      */
 
-    public static List<String> sortStrings(final ConverterMode mode, List<String> stringList) {
+    public static List<String> sortStrings(final ConverterMode mode, List<String> input) {
+        List<String> stringList = new ArrayList<>(input);
         Collections.sort(stringList, new Comparator<String>() {
             @Override
             public int compare(String s1, String s2) {

@@ -23,6 +23,10 @@ public class ObjectTable {
         this.db = databaseManager.getWritableDatabase();
     }
 
+    public SQLiteDatabase getDb() {
+        return db;
+    }
+
     public static void make(String tableName, SQLiteDatabase db) {
         String tableString = "CREATE TABLE " + tableName + " ( id INTEGER PRIMARY KEY, " + ColumnName + " TEXT)";
         db.execSQL(tableString);
@@ -84,8 +88,9 @@ public class ObjectTable {
     }
 
     public Cursor executeCustom(String query) {
-        Log.i("ObjectTable", "Close the cursor after using executeCustom.");
-        return db.rawQuery(query, null);
+        Cursor cursor = db.rawQuery(query, null);
+        databaseManager.closeDatabase();
+        return cursor;
     }
 
     public void drop() {
@@ -107,6 +112,10 @@ public class ObjectTable {
             String Query = "DELETE FROM " + tableName + " WHERE id IN (SELECT id FROM " + tableName + " ORDER BY id ASC LIMIT " + allowedEntries + ")";
             db.execSQL(Query);
         }
+        databaseManager.closeDatabase();
+    }
+
+    public void closeDatabase() {
         databaseManager.closeDatabase();
     }
 }

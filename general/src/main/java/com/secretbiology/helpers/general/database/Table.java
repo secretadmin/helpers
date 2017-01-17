@@ -34,6 +34,10 @@ public class Table {
         db.execSQL(tableString);
     }
 
+    public SQLiteDatabase getDb() {
+        return db;
+    }
+
     public long add(Row row) {
         ContentValues values = new ContentValues();
         for (Column c : row.getColumns()) {
@@ -180,7 +184,9 @@ public class Table {
     }
 
     public Cursor executeCustom(String query) {
-        return db.rawQuery(query, null);
+        Cursor cursor = db.rawQuery(query, null);
+        databaseManager.closeDatabase();
+        return cursor;
     }
 
     public void drop() {
@@ -214,5 +220,8 @@ public class Table {
         return s;
     }
 
+    public void closeDatabase() {
+        databaseManager.closeDatabase();
+    }
 
 }
