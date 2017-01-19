@@ -138,8 +138,8 @@ public class Table {
         return updated;
     }
 
-    public void delete(int id) {
-        db.delete(tableName, "id = ?", new String[]{String.valueOf(id)});
+    public void delete(String uniqueColumn, String value) {
+        db.delete(tableName, uniqueColumn + " = ?", new String[]{String.valueOf(value)});
         databaseManager.closeDatabase();
     }
 

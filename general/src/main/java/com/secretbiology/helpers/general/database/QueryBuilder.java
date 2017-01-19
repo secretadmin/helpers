@@ -1,5 +1,7 @@
 package com.secretbiology.helpers.general.database;
 
+import java.util.List;
+
 public class QueryBuilder {
 
     private String query = "";
@@ -187,7 +189,7 @@ public class QueryBuilder {
         return this;
     }
 
-    QueryBuilder columnList(String... allColumns) {
+    public QueryBuilder columnList(String... allColumns) {
         query = query.trim();
         query += " ";
         for (int i = 0; i < allColumns.length - 1; i++) {
@@ -195,6 +197,15 @@ public class QueryBuilder {
         }
         query += allColumns[allColumns.length - 1] + " ";
         return this;
+    }
+
+    public static String buildTableQuery(String tableName, List<String[]> columns) {
+        String query = "CREATE TABLE " + tableName + " ( ";
+        for (int i = 0; i < columns.size() - 1; i++) {
+            query += columns.get(i)[0].trim() + " " + columns.get(i)[1].trim() + " ,";
+        }
+        query += columns.get(columns.size() - 1)[0].trim() + " " + columns.get(columns.size() - 1)[1].trim() + " )";
+        return query;
     }
 
 }

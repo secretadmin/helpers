@@ -1,4 +1,4 @@
-package com.secretbiology.helpers.general;
+package com.secretbiology.helpers.general.listeners;
 
 import android.content.Context;
 import android.view.GestureDetector;
