@@ -65,7 +65,7 @@ public class InputView extends LinearLayout {
     private void build(Context context) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.input_view, this);
+        inflater.inflate(R.layout.com_secretbiology_input_view, this);
     }
 
     /**
@@ -74,8 +74,8 @@ public class InputView extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        layout = (TextInputLayout) this.findViewById(R.id.inputLayout);
-        editText = (TextInputEditText) this.findViewById(R.id.input);
+        layout = (TextInputLayout) this.findViewById(R.id.com_secretbiology_inputLayout);
+        editText = (TextInputEditText) this.findViewById(R.id.com_secretbiology_input);
         setDefaults();
     }
 
@@ -139,5 +139,15 @@ public class InputView extends LinearLayout {
         editText.setBackgroundColor(ReSourceID);
     }
 
+    public TextInputLayout getLayout() {
+        return layout;
+    }
 
+    public TextInputEditText getEditText() {
+        return editText;
+    }
+
+    public int getInputType() {
+        return inputType;
+    }
 }

@@ -1,8 +1,12 @@
 package com.secretbiology.helpers.general;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -158,6 +162,7 @@ public class General {
         return builder.toString();
     }
 
+
     /**
      * Makes Imageview grayscale
      *
@@ -227,7 +232,7 @@ public class General {
      * @param context : Context
      * @param message : Message to Display
      */
-    public static void shortToast(Context context, String message) {
+    public static void makeShortToast(Context context, String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
@@ -238,8 +243,51 @@ public class General {
      * @param message : Message to Display
      */
 
-    public static void longToast(Context context, String message) {
+    public static void makeLongToast(Context context, String message) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
 
+    /**
+     * Converts Bitmap into circular bitmap
+     *
+     * @param source : Source Bitmap
+     * @return : Circularize bitmap
+     */
+
+    public Bitmap CircleTransform(Bitmap source) {
+        int size = Math.min(source.getWidth(), source.getHeight());
+
+        int x = (source.getWidth() - size) / 2;
+        int y = (source.getHeight() - size) / 2;
+
+        Bitmap squaredBitmap = Bitmap.createBitmap(source, x, y, size, size);
+        if (squaredBitmap != source) {
+            source.recycle();
+        }
+
+        Bitmap bitmap = Bitmap.createBitmap(size, size, source.getConfig());
+
+        Canvas canvas = new Canvas(bitmap);
+        Paint paint = new Paint();
+        BitmapShader shader = new BitmapShader(squaredBitmap,
+                BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP);
+        paint.setShader(shader);
+        paint.setAntiAlias(true);
+
+        float r = size / 2f;
+        canvas.drawCircle(r, r, r, paint);
+
+        squaredBitmap.recycle();
+        return bitmap;
+    }
+
+    /**
+     * Checks if string is an valid email address pattern
+     *
+     * @param email : String
+     * @return : True or False
+     */
+    public boolean isValidEmail(String email) {
+        return email.trim().length() != 0 && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
 }

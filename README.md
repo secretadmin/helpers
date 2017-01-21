@@ -30,7 +30,7 @@ Following are the specifications related to compilations
 
 ### Use for Gradle
 
-     compile 'com.secretbiology.helpers:general:0.2.1'
+     compile 'com.secretbiology.helpers:general:0.2.4'
 
 
 ### For Maven
@@ -38,6 +38,6 @@ Following are the specifications related to compilations
      <dependency> 
      <groupId>com.secretbiology.helpers</groupId> 
      <artifactId>general</artifactId> 
-     <version>0.2.1</version> 
+     <version>0.2.4</version> 
      <type>pom</type> 
      </dependency>
