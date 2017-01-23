@@ -15,13 +15,13 @@
         android:layout_height="wrap_content"
         android:text="Hello World!" />
 
-    <com.secretbiology.helpers.general.views.InputView
-        android:id="@+id/input_notes"
+    <com.secretbiology.helpers.general.views.InputMultiAutoCompleteView
+        android:id="@+id/test_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        inputview:hint="Notes"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        inputview:hint="Notes" />
 
 
 </RelativeLayout>

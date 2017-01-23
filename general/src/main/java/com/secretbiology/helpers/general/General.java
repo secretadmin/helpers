@@ -83,7 +83,7 @@ public class General {
      * @return : Current timestamp
      */
     public static String timeStamp() {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault());
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         return formatter.format(new Date());
     }
 
@@ -254,7 +254,7 @@ public class General {
      * @return : Circularize bitmap
      */
 
-    public Bitmap CircleTransform(Bitmap source) {
+    public static Bitmap CircleTransform(Bitmap source) {
         int size = Math.min(source.getWidth(), source.getHeight());
 
         int x = (source.getWidth() - size) / 2;
@@ -287,7 +287,7 @@ public class General {
      * @param email : String
      * @return : True or False
      */
-    public boolean isValidEmail(String email) {
+    public static boolean isValidEmail(String email) {
         return email.trim().length() != 0 && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 }

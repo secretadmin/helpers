@@ -291,4 +291,19 @@ public class DateConverter {
         return stringList;
     }
 
+    /**
+     * Converts single string format to given
+     *
+     * @param mode   : Mode
+     * @param string : Old string
+     * @param format : Format
+     * @return : Returns format based on current calendar, or calender specified in ols string
+     * @throws ParseException
+     */
+
+    public static String changeFormat(final ConverterMode mode, String string, String format) throws ParseException {
+        Calendar calendar = convertToCalender(mode, string);
+        return new SimpleDateFormat(format, Locale.getDefault()).format(calendar);
+    }
+
 }

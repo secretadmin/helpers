@@ -159,6 +159,18 @@ public class QueryBuilder {
         return this;
     }
 
+    public QueryBuilder update() {
+        query = query.trim();
+        query += " UPDATE ";
+        return this;
+    }
+
+    public QueryBuilder set() {
+        query = query.trim();
+        query += " SET ";
+        return this;
+    }
+
     public QueryBuilder distinct() {
         query = query.trim();
         query += " DISTINCT ";
