@@ -1,4 +1,4 @@
-package com.secretbiology.helpers.general;
+package com.secretbiology.helpers.general.TimeUtils;
 
 /**
  * Simple class which converts any date format to Date

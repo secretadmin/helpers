@@ -13,8 +13,7 @@ import android.os.Build;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import org.joda.time.DateTime;
-import org.joda.time.Interval;
+import com.secretbiology.helpers.general.TimeUtils.TimeLeft;
 
 import java.net.Proxy;
 import java.net.ProxySelector;
@@ -24,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 /**
  * NCBSinfo © 2016, Secret Biology
@@ -113,20 +113,35 @@ public class General {
         }
     }
 
+    public static int getSeconds(Date startDate, Date endDate) {
+        return (int) TimeUnit.MILLISECONDS.toSeconds(startDate.getTime() - endDate.getTime());
+    }
+
+    public static int getMinutes(Date startDate, Date endDate) {
+        return (int) TimeUnit.MILLISECONDS.toMinutes(startDate.getTime() - endDate.getTime());
+    }
+
+    public static int getHours(Date startDate, Date endDate) {
+        return (int) TimeUnit.MILLISECONDS.toHours(startDate.getTime() - endDate.getTime());
+    }
+
+    public static int getDays(Date startDate, Date endDate) {
+        return (int) TimeUnit.MILLISECONDS.toDays(startDate.getTime() - endDate.getTime());
+    }
+
+    public static TimeLeft getTimeLeft(Date startDate, Date endDate) {
+        return new TimeLeft(startDate, endDate);
+    }
+
     /**
      * Converts simple time into readable format
-     *
-     * @param date : Date
-     * @return : Readable time in String
      */
-    public static String makeReadableTime(Date date) {
+    public static String makeReadableTime(Date statDate, Date endDate) {
+        TimeLeft timeLeft = new TimeLeft(statDate, endDate);
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-        DateTime timestamp = new DateTime(date);
-        DateTime currentTime = new DateTime(new Date());
-        Interval interval = new Interval(timestamp, currentTime);
-        int Minute = interval.toPeriod().getMinutes();
-        int Hours = interval.toPeriod().getHours();
-        int Days = interval.toPeriod().getDays();
+        int Minute = timeLeft.getMinutes();
+        int Hours = timeLeft.getHours();
+        int Days = timeLeft.getDays();
         if (Days == 0) {
             if (Hours == 0) {
                 if (Minute == 0) {
@@ -141,7 +156,7 @@ public class General {
             return "yesterday";
         } else if (Days > 1 && Days < 6) {
             return Days + " days ago";
-        } else return formatter.format(date);
+        } else return formatter.format(statDate);
     }
 
     private static final String CharSpace = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";

@@ -15,9 +15,9 @@ Following are the specifications related to compilations
 
 ### External libraries used
 
-(1) joda-time:joda-time:2.9.4 </br>
-(2) com.android.support:design:25.0.1 </br>
-(3) com.android.support:recyclerview-v7:25.0.1
+(1) com.google.code.gson:gson:2.8.0</br>
+(2) com.android.support:design:25.1.0 </br>
+(3) com.android.support:recyclerview-v7:25.1.0
 
 ### Currently supported functions
 
@@ -30,7 +30,7 @@ Following are the specifications related to compilations
 
 ### Use for Gradle
 
-     compile 'com.secretbiology.helpers:general:0.2.4'
+     compile 'com.secretbiology.helpers:general:0.2.6'
 
 
 ### For Maven
@@ -38,6 +38,6 @@ Following are the specifications related to compilations
      <dependency> 
      <groupId>com.secretbiology.helpers</groupId> 
      <artifactId>general</artifactId> 
-     <version>0.2.4</version> 
+     <version>0.2.6</version> 
      <type>pom</type> 
      </dependency>

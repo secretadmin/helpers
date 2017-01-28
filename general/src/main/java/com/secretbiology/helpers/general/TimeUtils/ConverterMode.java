@@ -1,4 +1,4 @@
-package com.secretbiology.helpers.general;
+package com.secretbiology.helpers.general.TimeUtils;
 
 public enum ConverterMode {
     DATE_FIRST,
