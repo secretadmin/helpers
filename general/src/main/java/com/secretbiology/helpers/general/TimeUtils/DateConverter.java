@@ -302,8 +302,8 @@ public class DateConverter {
      */
 
     public static String changeFormat(final ConverterMode mode, String string, String format) throws ParseException {
-        Calendar calendar = convertToCalender(mode, string);
-        return new SimpleDateFormat(format, Locale.getDefault()).format(calendar);
+        Date date = convertToDate(mode, string);
+        return new SimpleDateFormat(format, Locale.getDefault()).format(date);
     }
 
 }

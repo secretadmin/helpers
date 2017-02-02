@@ -39,7 +39,7 @@ ext {
     siteUrl = 'https://github.com/secretBiology'
     gitUrl = 'https://github.com/secretBiology/helpers.git'
 
-    libraryVersion = '0.2.6'
+    libraryVersion = '0.2.0'
 
     developerId = 'rohitsuratekar'
     developerName = 'Rohit Suratekar'
@@ -54,8 +54,7 @@ ext {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:design:25.1.0'
-    compile 'com.android.support:recyclerview-v7:25.1.0'
+    compile 'com.android.support:design:25.1.1'
     compile 'com.google.code.gson:gson:2.8.0'
 
 }

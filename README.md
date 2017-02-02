@@ -16,21 +16,20 @@ Following are the specifications related to compilations
 ### External libraries used
 
 (1) com.google.code.gson:gson:2.8.0</br>
-(2) com.android.support:design:25.1.0 </br>
-(3) com.android.support:recyclerview-v7:25.1.0
+(2) com.android.support:design:25.1.1 </br>
 
 ### Currently supported functions
 
 (1) SQLight Database Functions </br>
 (2) General Functions </br>
 (3) General UI views and ViewPageAdapters </br>
-(4) Date Converter </br>
+(4) Time Utils </br>
 (5) Test Logger 
 
 
 ### Use for Gradle
 
-     compile 'com.secretbiology.helpers:general:0.2.6'
+     compile 'com.secretbiology.helpers:general:0.2.0'
 
 
 ### For Maven
@@ -38,6 +37,6 @@ Following are the specifications related to compilations
      <dependency> 
      <groupId>com.secretbiology.helpers</groupId> 
      <artifactId>general</artifactId> 
-     <version>0.2.6</version> 
+     <version>0.2.0</version> 
      <type>pom</type> 
      </dependency>
