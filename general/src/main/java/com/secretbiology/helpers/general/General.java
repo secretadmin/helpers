@@ -1,5 +1,6 @@
 package com.secretbiology.helpers.general;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
@@ -10,10 +11,9 @@ import android.graphics.Paint;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import com.secretbiology.helpers.general.TimeUtils.TimeLeft;
 
 import java.net.Proxy;
 import java.net.ProxySelector;
@@ -23,7 +23,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
 /**
  * NCBSinfo © 2016, Secret Biology
@@ -31,6 +30,10 @@ import java.util.concurrent.TimeUnit;
  * Created by Rohit Suratekar on 11-08-16.
  */
 public class General {
+
+    public static final String DEFAULT_TIMESTAMP_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private static final String CharSpace = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    private static SecureRandom randomFunc = new SecureRandom();
 
     /**
      * Checks if network is available.
@@ -83,7 +86,7 @@ public class General {
      * @return : Current timestamp
      */
     public static String timeStamp() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        SimpleDateFormat formatter = new SimpleDateFormat(DEFAULT_TIMESTAMP_FORMAT, Locale.getDefault());
         return formatter.format(new Date());
     }
 
@@ -112,55 +115,6 @@ public class General {
             return context.getResources().getColor(color);
         }
     }
-
-    public static int getSeconds(Date startDate, Date endDate) {
-        return (int) TimeUnit.MILLISECONDS.toSeconds(startDate.getTime() - endDate.getTime());
-    }
-
-    public static int getMinutes(Date startDate, Date endDate) {
-        return (int) TimeUnit.MILLISECONDS.toMinutes(startDate.getTime() - endDate.getTime());
-    }
-
-    public static int getHours(Date startDate, Date endDate) {
-        return (int) TimeUnit.MILLISECONDS.toHours(startDate.getTime() - endDate.getTime());
-    }
-
-    public static int getDays(Date startDate, Date endDate) {
-        return (int) TimeUnit.MILLISECONDS.toDays(startDate.getTime() - endDate.getTime());
-    }
-
-    public static TimeLeft getTimeLeft(Date startDate, Date endDate) {
-        return new TimeLeft(startDate, endDate);
-    }
-
-    /**
-     * Converts simple time into readable format
-     */
-    public static String makeReadableTime(Date statDate, Date endDate) {
-        TimeLeft timeLeft = new TimeLeft(statDate, endDate);
-        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-        int Minute = timeLeft.getMinutes();
-        int Hours = timeLeft.getHours();
-        int Days = timeLeft.getDays();
-        if (Days == 0) {
-            if (Hours == 0) {
-                if (Minute == 0) {
-                    return "few seconds ago";
-                } else if (Minute == 1) {
-                    return "a minute ago";
-                } else return Minute + " minutes ago";
-            } else if (Hours == 1) {
-                return "an hour ago";
-            } else return Hours + " hours ago";
-        } else if (Days == 1) {
-            return "yesterday";
-        } else if (Days > 1 && Days < 6) {
-            return Days + " days ago";
-        } else return formatter.format(statDate);
-    }
-
-    private static final String CharSpace = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    private static SecureRandom randomFunc = new SecureRandom();
 
     /**
      * Returns random alpha-numerical string
@@ -304,5 +258,34 @@ public class General {
      */
     public static boolean isValidEmail(String email) {
         return email.trim().length() != 0 && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    /**
+     * returns default value to string if it is not null
+     *
+     * @param value        : Value to check
+     * @param defaultValue : Default value
+     * @return : Assignment
+     */
+    public static String assignDefaultIfNull(String value, String defaultValue) {
+        if (value != null) {
+            return value;
+        } else {
+            return defaultValue;
+        }
+    }
+
+    /**
+     * Changes status bar color if android version is greater than lollipop
+     *
+     * @param activity : Current activity
+     * @param color    : Desired Color
+     */
+
+    public static void changeStatusBarColor(Activity activity, int color) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            activity.getWindow().setStatusBarColor(General.getColor(activity, color));
+        }
     }
 }

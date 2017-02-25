@@ -10,6 +10,15 @@ public class QueryBuilder {
     public QueryBuilder() {
     }
 
+    public static String buildTableQuery(String tableName, List<String[]> columns) {
+        String query = "CREATE TABLE " + tableName + " ( ";
+        for (int i = 0; i < columns.size() - 1; i++) {
+            query += columns.get(i)[0].trim() + " " + columns.get(i)[1].trim() + " ,";
+        }
+        query += columns.get(columns.size() - 1)[0].trim() + " " + columns.get(columns.size() - 1)[1].trim() + " )";
+        return query;
+    }
+
     public String build() {
         return query;
     }
@@ -91,7 +100,6 @@ public class QueryBuilder {
         query += " = '" + value + "' ";
         return this;
     }
-
 
     public QueryBuilder selectAll() {
         query = query.trim();
@@ -201,6 +209,31 @@ public class QueryBuilder {
         return this;
     }
 
+    public QueryBuilder insert() {
+        query = query.trim();
+        query += " INSERT ";
+        return this;
+    }
+
+    public QueryBuilder insertInto() {
+        query = query.trim();
+        query += " INSERT INTO ";
+        return this;
+    }
+
+    public QueryBuilder alterTableAdd(String tableName, String newColumn, String typeOfColumn) {
+        query = query.trim();
+        query += " ALTER TABLE " + tableName + " ADD " + newColumn + " " + typeOfColumn + " ";
+        return this;
+    }
+
+    public QueryBuilder alterTableRename(String oldTableName, String newTableName) {
+        query = query.trim();
+        query += " ALTER TABLE " + oldTableName + " RENAME TO " + newTableName + " ";
+        return this;
+    }
+
+
     public QueryBuilder columnList(String... allColumns) {
         query = query.trim();
         query += " ";
@@ -209,15 +242,6 @@ public class QueryBuilder {
         }
         query += allColumns[allColumns.length - 1] + " ";
         return this;
-    }
-
-    public static String buildTableQuery(String tableName, List<String[]> columns) {
-        String query = "CREATE TABLE " + tableName + " ( ";
-        for (int i = 0; i < columns.size() - 1; i++) {
-            query += columns.get(i)[0].trim() + " " + columns.get(i)[1].trim() + " ,";
-        }
-        query += columns.get(columns.size() - 1)[0].trim() + " " + columns.get(columns.size() - 1)[1].trim() + " )";
-        return query;
     }
 
 }

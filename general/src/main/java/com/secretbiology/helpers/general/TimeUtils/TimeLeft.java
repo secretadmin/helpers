@@ -10,6 +10,8 @@ import java.util.Date;
 public class TimeLeft {
     private Date startDate;
     private Date endDate;
+    private int years;
+    private int months;
     private int days;
     private int hours;
     private int minutes;
@@ -24,6 +26,13 @@ public class TimeLeft {
         long minutesInMilli = secondsInMilli * 60;
         long hoursInMilli = minutesInMilli * 60;
         long daysInMilli = hoursInMilli * 24;
+        long monthsInMilli = daysInMilli * 30;
+        long yearsInMilli = monthsInMilli * 12;
+
+        long elapsedYears = diff / yearsInMilli;
+        diff = diff % yearsInMilli;
+        long elapsedMonths = diff / monthsInMilli;
+        diff = diff % monthsInMilli;
         long elapsedDays = diff / daysInMilli;
         diff = diff % daysInMilli;
         long elapsedHours = diff / hoursInMilli;
@@ -31,6 +40,9 @@ public class TimeLeft {
         long elapsedMinutes = diff / minutesInMilli;
         diff = diff % minutesInMilli;
         long elapsedSeconds = diff / secondsInMilli;
+
+        this.years = (int) elapsedYears;
+        this.months = (int) elapsedMonths;
         this.days = (int) elapsedDays;
         this.minutes = (int) elapsedMinutes;
         this.seconds = (int) elapsedSeconds;
@@ -57,6 +69,14 @@ public class TimeLeft {
         Calendar c1 = Calendar.getInstance();
         c1.setTime(this.endDate);
         return c1;
+    }
+
+    public int getYears() {
+        return years;
+    }
+
+    public int getMonths() {
+        return months;
     }
 
     public int getDays() {
