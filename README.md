@@ -9,14 +9,14 @@ This project is currently in development phase. To get beta functions, use follo
 Following are the specifications related to compilations 
 
      compileSdkVersion 25
-     buildToolsVersion "23.0.3"
+     buildToolsVersion "25.0.2"
      minSdkVersion 15
      targetSdkVersion 25
 
 ### External libraries used
 
 (1) com.google.code.gson:gson:2.8.0</br>
-(2) com.android.support:design:25.2.0 </br>
+(2) com.android.support:design:25.3.0 </br>
 
 ### Currently supported functions
 
@@ -30,7 +30,7 @@ Following are the specifications related to compilations
 
 ### Use for Gradle
 
-     compile 'com.secretbiology.helpers:general:0.2.1'
+     compile 'com.secretbiology.helpers:general:1.0.0'
 
 
 ### For Maven
@@ -38,6 +38,6 @@ Following are the specifications related to compilations
      <dependency> 
      <groupId>com.secretbiology.helpers</groupId> 
      <artifactId>general</artifactId> 
-     <version>0.2.1</version> 
+     <version>1.0.0</version> 
      <type>pom</type> 
      </dependency>

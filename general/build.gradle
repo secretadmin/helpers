@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 android {
     compileSdkVersion 25
-    buildToolsVersion "23.0.3"
+    buildToolsVersion '25.0.2'
 
     defaultConfig {
         minSdkVersion 15
@@ -39,7 +39,7 @@ ext {
     siteUrl = 'https://github.com/secretBiology'
     gitUrl = 'https://github.com/secretBiology/helpers.git'
 
-    libraryVersion = '0.2.1'
+    libraryVersion = '1.0.0'
 
     developerId = 'rohitsuratekar'
     developerName = 'Rohit Suratekar'
@@ -54,7 +54,7 @@ ext {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:design:25.2.0'
+    compile 'com.android.support:design:25.3.0'
     compile 'com.google.code.gson:gson:2.8.0'
 
 }

@@ -1,6 +1,8 @@
 package com.secretbiology.helpers.general;
 
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
@@ -8,9 +10,11 @@ import android.graphics.Canvas;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
+import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -286,6 +290,60 @@ public class General {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             activity.getWindow().setStatusBarColor(General.getColor(activity, color));
+        }
+    }
+
+    /**
+     * Copies text to clipboard
+     *
+     * @param context : Context
+     * @param label   : Label for clipboard history
+     * @param text    : Text to copy
+     */
+    public static void copyToClipBoard(Context context, String label, String text) {
+        ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText(label, text);
+        clipboard.setPrimaryClip(clip);
+    }
+
+    /**
+     * Copies text to clipboard and makes toast
+     *
+     * @param context : Context
+     * @param label   : Label for clipboard history
+     * @param text    : Text to copy
+     */
+
+    public static void copyToClipBoardWithToast(Context context, String label, String text) {
+        ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText(label, text);
+        clipboard.setPrimaryClip(clip);
+        makeShortToast(context, "Copied to clipboard!");
+    }
+
+    /**
+     * Copies text to clipboard and makes toast
+     *
+     * @param context : Context
+     * @param text    : Text to copy
+     */
+    public static void copyToClipBoardWithToast(Context context, String text) {
+        ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("SecretBiology", text);
+        clipboard.setPrimaryClip(clip);
+        makeShortToast(context, "Copied to clipboard!");
+    }
+
+    /**
+     * Changes color of MenuItem , also checks if it is null or not
+     *
+     * @param context : Context
+     * @param item    : MenuItem
+     * @param color   : Color Resource
+     */
+    public static void changeMenuColor(Context context, MenuItem item, int color) {
+        if (item != null) {
+            item.getIcon().setColorFilter(General.getColor(context, color), PorterDuff.Mode.SRC_ATOP);
         }
     }
 }
