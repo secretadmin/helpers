@@ -16,7 +16,7 @@ Following are the specifications related to compilations
 ### External libraries used
 
 (1) com.google.code.gson:gson:2.8.0</br>
-(2) com.android.support:design:25.3.0 </br>
+(2) com.android.support:design:25.3.1 </br>
 
 ### Currently supported functions
 
@@ -30,7 +30,7 @@ Following are the specifications related to compilations
 
 ### Use for Gradle
 
-     compile 'com.secretbiology.helpers:general:1.0.0'
+     compile 'com.secretbiology.helpers:general:1.0.1'
 
 
 ### For Maven
@@ -38,6 +38,6 @@ Following are the specifications related to compilations
      <dependency> 
      <groupId>com.secretbiology.helpers</groupId> 
      <artifactId>general</artifactId> 
-     <version>1.0.0</version> 
+     <version>1.0.1</version> 
      <type>pom</type> 
      </dependency>

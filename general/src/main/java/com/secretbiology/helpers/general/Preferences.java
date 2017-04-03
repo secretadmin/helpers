@@ -11,7 +11,7 @@ import android.preference.PreferenceManager;
  * Abstract preference class to handle shared preferences
  */
 
-abstract class Preferences {
+public abstract class Preferences {
     private SharedPreferences prefs;
 
     Preferences(Context context) {
