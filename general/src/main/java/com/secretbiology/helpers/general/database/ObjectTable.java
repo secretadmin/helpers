@@ -8,6 +8,7 @@ import android.util.SparseArray;
 
 import com.google.gson.Gson;
 
+@Deprecated
 public class ObjectTable {
 
 

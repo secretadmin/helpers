@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public class Table {
 
     private SQLiteDatabase db;

@@ -19,6 +19,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.secretbiology.helpers.general.security.EncryptorHelper;
+
 import java.net.Proxy;
 import java.net.ProxySelector;
 import java.net.URI;
@@ -112,6 +114,7 @@ public class General {
      * @param color    : color resource
      * @return : int color
      */
+    @Deprecated
     public static int getColor(Context context, int color) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return context.getResources().getColor(color, context.getTheme());
@@ -345,5 +348,29 @@ public class General {
         if (item != null) {
             item.getIcon().setColorFilter(General.getColor(context, color), PorterDuff.Mode.SRC_ATOP);
         }
+    }
+
+    /**
+     * Uses PKCS12 to encrypt
+     *
+     * @param plainText : Text to encrypt
+     * @param password: Password
+     * @return: Encrypted Text
+     */
+    public static String encrypt(String plainText, String password) {
+        EncryptorHelper.Encryptor encryptor = new EncryptorHelper().PKCS12_ENCRYPTOR;
+        return encryptor.encrypt(plainText, password);
+    }
+
+    /**
+     * Uses PKCS12 to decrypt
+     *
+     * @param encryptedText : Encrypted text
+     * @param password:     Password
+     * @return: Decrypted Text
+     */
+    public static String decrypt(String encryptedText, String password) {
+        EncryptorHelper.Encryptor encryptor = new EncryptorHelper().PKCS12_ENCRYPTOR;
+        return encryptor.decrypt(encryptedText, password);
     }
 }

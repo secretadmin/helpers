@@ -3,6 +3,7 @@ package com.secretbiology.helpers.general.database;
 import java.util.HashMap;
 import java.util.List;
 
+@Deprecated
 public class Row {
     private int key;
     private List<Column> columns;

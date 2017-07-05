@@ -2,6 +2,7 @@ package com.secretbiology.helpers.general.database;
 
 import java.util.List;
 
+@Deprecated
 public class QueryBuilder {
 
     private String query = "";

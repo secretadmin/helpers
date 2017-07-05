@@ -1,5 +1,6 @@
 package com.secretbiology.helpers.general.database;
 
+@Deprecated
 public class Column {
 
     public enum TYPE {INTEGER_PRIMARY_KEY, INTEGER, TEXT, BLOB, REAL}

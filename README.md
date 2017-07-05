@@ -8,29 +8,33 @@ This project is currently in development phase. To get beta functions, use follo
 ### Specifications
 Following are the specifications related to compilations 
 
-     compileSdkVersion 25
-     buildToolsVersion "25.0.2"
+     compileSdkVersion 26
+     buildToolsVersion "25.4.0"
      minSdkVersion 15
-     targetSdkVersion 25
+     targetSdkVersion 26
 
 ### External libraries used
 
-(1) com.google.code.gson:gson:2.8.0</br>
-(2) com.android.support:design:25.3.1 </br>
+(1) com.google.code.gson:gson:2.8.1</br>
+(2) com.android.support:design:25.4.0 </br>
 
 ### Currently supported functions
 
-(1) SQLight Database Functions and Query Builder</br>
-(2) General Functions </br>
-(3) General UI views and ViewPageAdapters </br>
-(4) Time Utils </br>
-(5) Simple Logger </br>
-(6) Custom  views and Listeners 
+(1) General Functions </br>
+(2) General UI views and ViewPageAdapters </br>
+(3) Time Utils </br>
+(4) Simple Logger </br>
+(5) Custom  views and Listeners </br>
+(6) PKCS12 and PBKDF2 Encryption compatible with android N
 
+### Deprecated 
+(1) SQLight Database Functions and Query Builder</br>
+(2) InputView, InputAutoCompleteView, InputMultiAutoCompleteView </br>
+(3) AES Encryption with SHA1PRNG (added new EncryptorHelper or General.encrypt() functions)
 
 ### Use for Gradle
 
-     compile 'com.secretbiology.helpers:general:1.0.2'
+     compile 'com.secretbiology.helpers:general:1.1.1'
 
 
 ### For Maven
@@ -38,6 +42,6 @@ Following are the specifications related to compilations
      <dependency> 
      <groupId>com.secretbiology.helpers</groupId> 
      <artifactId>general</artifactId> 
-     <version>1.0.2</version> 
+     <version>1.1.1</version> 
      <type>pom</type> 
      </dependency>
