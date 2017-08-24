@@ -25,7 +25,7 @@ Following are the specifications related to compilations
 (3) Time Utils </br>
 (4) Simple Logger </br>
 (5) Custom  views and Listeners </br>
-(6) PKCS12 and PBKDF2 Encryption compatible with android N
+(6) PBKDF2 based Encryption compatible with android N
 
 ### Deprecated 
 (1) SQLight Database Functions and Query Builder</br>
@@ -34,7 +34,7 @@ Following are the specifications related to compilations
 
 ### Use for Gradle
 
-     compile 'com.secretbiology.helpers:general:1.1.1'
+     compile 'com.secretbiology.helpers:general:1.1.3'
 
 
 ### For Maven
@@ -42,6 +42,6 @@ Following are the specifications related to compilations
      <dependency> 
      <groupId>com.secretbiology.helpers</groupId> 
      <artifactId>general</artifactId> 
-     <version>1.1.1</version> 
+     <version>1.1.3</version> 
      <type>pom</type> 
      </dependency>

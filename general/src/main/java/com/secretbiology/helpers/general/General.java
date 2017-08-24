@@ -351,26 +351,26 @@ public class General {
     }
 
     /**
-     * Uses PKCS12 to encrypt
+     * Uses PBKDF2 to encrypt
      *
      * @param plainText : Text to encrypt
      * @param password: Password
      * @return: Encrypted Text
      */
     public static String encrypt(String plainText, String password) {
-        EncryptorHelper.Encryptor encryptor = new EncryptorHelper().PKCS12_ENCRYPTOR;
+        EncryptorHelper.Encryptor encryptor = new EncryptorHelper().PBKDF2_ENCRYPTOR;
         return encryptor.encrypt(plainText, password);
     }
 
     /**
-     * Uses PKCS12 to decrypt
+     * Uses PBKDF2 to decrypt
      *
      * @param encryptedText : Encrypted text
      * @param password:     Password
      * @return: Decrypted Text
      */
     public static String decrypt(String encryptedText, String password) {
-        EncryptorHelper.Encryptor encryptor = new EncryptorHelper().PKCS12_ENCRYPTOR;
+        EncryptorHelper.Encryptor encryptor = new EncryptorHelper().PBKDF2_ENCRYPTOR;
         return encryptor.decrypt(encryptedText, password);
     }
 }
