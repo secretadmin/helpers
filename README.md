@@ -8,30 +8,40 @@ This project is currently in development phase. To get beta functions, use follo
 ### Specifications
 Following are the specifications related to compilations 
 
-     compileSdkVersion 24
-     buildToolsVersion "23.0.3"
-     minSdkVersion 19
-     targetSdkVersion 24
+     compileSdkVersion 26
+     buildToolsVersion "25.4.0"
+     minSdkVersion 15
+     targetSdkVersion 26
 
 ### External libraries used
 
-(1) joda-time:joda-time:2.9.4
+(1) com.google.code.gson:gson:2.8.1</br>
+(2) com.android.support:design:25.4.0 </br>
 
 ### Currently supported functions
 
-(1) SQLight Database Functions </br>
-(2) General Functions
+(1) General Functions </br>
+(2) General UI views and ViewPageAdapters </br>
+(3) Time Utils </br>
+(4) Simple Logger </br>
+(5) Custom  views and Listeners </br>
+(6) PBKDF2 based Encryption compatible with android N
 
+### Deprecated 
+(1) SQLight Database Functions and Query Builder</br>
+(2) InputView, InputAutoCompleteView, InputMultiAutoCompleteView </br>
+(3) AES Encryption with SHA1PRNG (added new EncryptorHelper or General.encrypt() functions)
 
 ### Use for Gradle
 
-     compile 'com.secretbiology.helpers:general:0.1.3'
+     compile 'com.secretbiology.helpers:general:1.1.3'
+
 
 ### For Maven
 
      <dependency> 
      <groupId>com.secretbiology.helpers</groupId> 
      <artifactId>general</artifactId> 
-     <version>0.1.3</version> 
+     <version>1.1.3</version> 
      <type>pom</type> 
      </dependency>
